@@ -35,9 +35,18 @@ fn rect_area(rect: Rectangle) -> f32 {
     return area;
 }
 
+fn square(point: Point, side_len: f32) -> Rectangle {
+    println!("left: {:?}, bottom: {:?}", point.x, point.y);
+
+
+    return Rectangle {
+        top_left: Point {x: point.x, y: point.y + side_len }, 
+        bottom_right: Point {x: point.x + side_len, y: point.y }
+    };
+}
+
 fn main() {
     // Create struct with field init shorthand
-    /* end 63
     let name = String::from("Peter");
     let age = 27;
     let peter = Person { name, age };
@@ -64,17 +73,18 @@ fn main() {
     let Point { y: left_edge, x: top_edge } = point;
     println!("Point: {:?}, top_edge: {:?}, left_edge {:?}", point, top_edge, left_edge);
     
-    */
 
     let rectangle = Rectangle {
         // struct instantiation is an expression too
         top_left: Point { x: 2.0, y: 5.0 },
         bottom_right: Point { x: 12.0, y: 1.0},
     };
-
     println!("{}", rect_area(rectangle));
 
-    /* end 87
+    // creates a square from a given point
+    let bottom_left = Point {x: 1.0, y: 1.0};
+    println!("{:?}", square(bottom_left, 3.0));
+
 
     // Instantiate a unit struct
     let _unit = Unit;
@@ -89,5 +99,4 @@ fn main() {
     let Pair(integer, decimal) = pair;
 
     println!("pair contains {:?} and {:?}", integer, decimal);
-    */
 }

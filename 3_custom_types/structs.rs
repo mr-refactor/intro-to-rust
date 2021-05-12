@@ -19,6 +19,7 @@ struct Point {
 
 // Structs can be reused as fields of another struct
 #[allow(dead_code)]
+#[derive(Debug)]
 struct Rectangle {
     // A rectangle can be specified by where the top left and bottom right
     // corners are in space.
@@ -26,8 +27,17 @@ struct Rectangle {
     bottom_right: Point,
 }
 
+fn rect_area(rect: Rectangle) -> f32 {
+    let (Point {x: left, y: top}, 
+        Point {x: right, y: bottom}) 
+        = (rect.top_left, rect.bottom_right);
+    let area: f32 = (right - left) * (top - bottom);
+    return area;
+}
+
 fn main() {
     // Create struct with field init shorthand
+    /* end 63
     let name = String::from("Peter");
     let age = 27;
     let peter = Person { name, age };
@@ -53,12 +63,18 @@ fn main() {
     // Destructure the point using a `let` binding
     let Point { y: left_edge, x: top_edge } = point;
     println!("Point: {:?}, top_edge: {:?}, left_edge {:?}", point, top_edge, left_edge);
+    
+    */
 
-    let _rectangle = Rectangle {
+    let rectangle = Rectangle {
         // struct instantiation is an expression too
-        top_left: Point { x: left_edge, y: top_edge },
-        bottom_right: bottom_right,
+        top_left: Point { x: 2.0, y: 5.0 },
+        bottom_right: Point { x: 12.0, y: 1.0},
     };
+
+    println!("{}", rect_area(rectangle));
+
+    /* end 87
 
     // Instantiate a unit struct
     let _unit = Unit;
@@ -73,4 +89,5 @@ fn main() {
     let Pair(integer, decimal) = pair;
 
     println!("pair contains {:?} and {:?}", integer, decimal);
+    */
 }
